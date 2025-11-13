@@ -24,6 +24,8 @@ L1:
     CALL CALCULATE
     
     LOOP L1 
+    
+    LEA rax,[resultArray]
     RET
 CALCULATE:
     SUBSS xmm1,xmm0;subtracvct init with final
@@ -32,9 +34,8 @@ CALCULATE:
     ;Conversion
     MULSS xmm1,[var1];multiply with 1k
     DIVSS xmm1,[var2];divide by 3600
-    DIVSS xmm01xmm2
+    DIVSS xmm1,xmm2
     CVTSS2SI EBX, xmm1; Put first in EBX
-    LEA R8, [resultArray]
-    MOV [R8+R9],EBX
+    MOV [resultArray+R9],EBX
     ADD R9,4
     RET

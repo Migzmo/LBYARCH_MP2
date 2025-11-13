@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+extern int* assemaccel(int n, float *inputArray);
 int computeAcceleration(float initialVelocity, float finalVelocity, float time) {
     return (int) roundf((finalVelocity - initialVelocity) * 1000 / 3600 / time);
 }
@@ -17,7 +18,7 @@ int main(void) {
         perror("malloc failed");
         return 1;
     }
-
+    
     for (int i = 0; i < Y; i++) {
         scanf("%f, %f, %f", &input[i][0], &input[i][1], &input[i][2]);
     }
@@ -34,10 +35,10 @@ int main(void) {
     for (int i = 0; i < Y; i++) {
         resultArray[i] = computeAcceleration(input[i][0], input[i][1], input[i][2]);
     } 
-
+       int *assemblyResult = assemaccel(Y,(float*)input);
+    printf("ROW\tC OUTPUT\tASMB OUTPUT\n");  // table header
     for (int i = 0; i < Y; i++) {
-        printf("%f", resultArray[i]);
-        printf(" ");
+        printf("%d\t%.2f\t\t%d\n", i, resultArray[i], assemblyResult[i]);
     }
 
     free(input);
