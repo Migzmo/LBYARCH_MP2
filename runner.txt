@@ -1,4 +1,4 @@
-nasm -f win64 assemacel.asm -o assemacel.obj
+nasm -f win64 assemblyComputeAccelerations.asm -o assemblyComputeAccelerations.obj
 gcc -c cAcceleration.c -m64 -o cAcceleration.obj
-gcc cAcceleration.obj assemacel.obj -o cAcceleration.exe -m64
-cAcceleration.exe < input.txt
+gcc cAcceleration.obj assemblyComputeAccelerations.obj -o cAcceleration.exe -m64
+cAcceleration.exe
