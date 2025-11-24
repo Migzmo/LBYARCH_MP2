@@ -42,12 +42,12 @@ runner.bat
 | 10000         | 0.001270000 sec        | 0.000042333 sec| 0.000520400 sec               | 0.000017347 sec       | PASS        |
 
 ### Analysis of Performance
-- **Assembly Outperforms C**: The assembly implementation outperforms the C implementation across all of the test sizes aside from Y = 10, this discrepancy is due to the limited sample size, causing the assembly-to-C overhead to affect the execution time more rather than the actual computations.
+- **Assembly Outperforms C**: The assembly implementation outperforms the C implementation across all of the test sizes aside from Y = 10, this discrepancy is due to the limited input size, causing the C-to-assembly overhead to affect the execution time more rather than the actual computations.
 - **Scalar SIMD Instructions**: The assembly implementation uses scalar SIMD instructions (MOVSS, SUBSS, MULSS, DIVSS) for efficient floating-point operations, which contribute to its superior performance.
-- **Correctness Maintained**: The two function maintained 100% correctness across all test sizes, with assembly and C outputs matching perfectly across the four test sizes.
+- **Correctness Maintained**: The two functions maintained 100% correctness across all test sizes, with assembly and C outputs matching perfectly across the four test sizes.
 
 **Performance Observations:**
-- The assembly implementation achieves faster execution times because assembly allows direct use of CPU registers and precise control over the instructions executed. This minimizes overhead typically introduced in C, such as memory accesses, stack operations, and function call setup, resulting in more efficient computation. At smaller input sizes (Y=10), C actually outperfomed assembly due to the function call overheard from assembly-to-C interface. As input size increases (Y=10000), the assembly advantage becomes more significant, demonstrating better scalability. The consistent speedup across all test sizes validates the efficiency of the assembly implementation.
+- The assembly implementation achieves faster execution times because assembly allows direct use of CPU registers and precise control over the instructions executed. This minimizes overhead typically introduced in C, such as memory accesses, stack operations, and function call setup, resulting in more efficient computation. At smaller input sizes (Y=10), C actually outperformed assembly due to the function call overhead from C-to-assembly interface. As input size increases (Y=10000), the assembly advantage becomes more significant, demonstrating better scalability. The consistent speedup across larger test sizes validates the efficiency of the assembly implementation.
 
 ---
 
