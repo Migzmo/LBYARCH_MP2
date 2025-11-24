@@ -10,49 +10,9 @@
 
 ## Project Description
 This project implements an acceleration calculator using both C and x86-64 assembly language. The program:
-- Converts velocity from km/h to m/s
 - Calculates acceleration using the formula: `a = (vf - vi) * 1000 / 3600 / t`
 - Uses single-precision floating-point operations in assembly
 - Converts the result from float to integer
-
----
-
-## Performance Analysis
-
-### Execution Time Results (Average of 30 runs)
-
-| Input Size (Y) | Average Time (seconds) | Average Time (ms) |
-|----------------|------------------------|-------------------|
-| 10             | 0.000001234           | 0.001234          |
-| 100            | 0.000012345           | 0.012345          |
-| 1000           | 0.000123456           | 0.123456          |
-| 10000          | 0.001234567           | 1.234567          |
-
-*TBA*
-
-### Analysis
-- The assembly implementation is really fast as it uses scalar SIMD instructions (MOVSS, SUBSS, MULSS, DIVSS) for efficient floating-point operations.
-- The execution time scales linearly with input size.
-- The function maintains correctness across all of the test sizes.
-
-**Performance Observations:**
-- The assembly implementation achieves very fast execution times, because assembly allows the direct use of CPU registers and precise control over the instructions executed. This essentially minimizes the overheady typically introduced in C, such as memory accesses, stack operations, and function call setup, resulting in more efficient computation.
-
----
-
-## Correctness Verification
-
-All test cases passed correctness checks comparing C and Assembly outputs.
-
-![Screenshot of program output](screenshot.png)
-
----
-
-## Files Included
-- `cAcceleration.c` - Main C program with timing and correctness checks.
-- `assemblyComputeAccelerations.asm` - x86-64 assembly implementation.
-- `runner.bat` - Batch file to compile and run.
-- `README.md` - This file that contains the documentation for execution time, performance analysis, etc.
 
 ---
 
@@ -67,6 +27,50 @@ All test cases passed correctness checks comparing C and Assembly outputs.
 ```batch
 runner.bat
 ```
+
+---
+
+## Performance Analysis
+
+### Execution Time Results
+
+| Test Size (Y) | C Total Time (30 runs) | C Average Time | Assembly Total Time (30 runs) | Assembly Average Time | Correctness |
+|---------------|------------------------|----------------|-------------------------------|-----------------------|-------------|
+| 10            | 0.000003900 sec        | 0.000000130 sec| 0.000008300 sec               | 0.000000277 sec       | PASS        |
+| 100           | 0.000015300 sec        | 0.000000510 sec| 0.000005000 sec               | 0.000000167 sec       | PASS        |
+| 1000          | 0.000123900 sec        | 0.000004130 sec| 0.000047900 sec               | 0.000001597 sec       | PASS        |
+| 10000         | 0.001270000 sec        | 0.000042333 sec| 0.000520400 sec               | 0.000017347 sec       | PASS        |
+
+### Analysis of Performance
+- **Assembly Outperforms C**: The assembly implementation outperforms the C implementation across all of the test sizes aside from Y = 10, this discrepancy is due to the limited sample size, causing the assembly-to-C overhead to affect the execution time more rather than the actual computations.
+- **Scalar SIMD Instructions**: The assembly implementation uses scalar SIMD instructions (MOVSS, SUBSS, MULSS, DIVSS) for efficient floating-point operations, which contribute to its superior performance.
+- **Correctness Maintained**: The two function maintained 100% correctness across all test sizes, with assembly and C outputs matching perfectly across the four test sizes.
+
+**Performance Observations:**
+- The assembly implementation achieves faster execution times because assembly allows direct use of CPU registers and precise control over the instructions executed. This minimizes overhead typically introduced in C, such as memory accesses, stack operations, and function call setup, resulting in more efficient computation. At smaller input sizes (Y=10), C actually outperfomed assembly due to the function call overheard from assembly-to-C interface. As input size increases (Y=10000), the assembly advantage becomes more significant, demonstrating better scalability. The consistent speedup across all test sizes validates the efficiency of the assembly implementation.
+
+---
+
+## Screenshots of Program Output with the Correctness Check
+
+All test cases passed correctness checks comparing C and Assembly outputs.
+
+![Screenshot of program output #1](LBYARCH_MP2_SS_PROGRAM_OUTPUT_1.png)
+
+![Screenshot of program output #2](LBYARCH_MP2_SS_PROGRAM_OUTPUT_2.png)
+
+---
+
+## Files Included
+- `README.md` - This file that contains the documentation for execution time, performance analysis, etc.
+- `assemblyComputeAccelerations.asm` - x86-64 assembly implementation
+- `assemblyComputeAccelerations.obj` - Compiled assembly object file
+- `cAcceleration.c` - Main C program with timing and correctness checks
+- `cAcceleration.exe` - Compiled executable
+- `cAcceleration.obj` - Compiled C object file
+- `runner.bat` - Batch file to compile and run
+- `LBYARCH_MP2_SS_PROGRAM_OUTPUT_1.png` - Screenshot of program output part 1
+- `LBYARCH_MP2_SS_PROGRAM_OUTPUT_2.png` - Screenshot of program output part 2
 
 ---
 
