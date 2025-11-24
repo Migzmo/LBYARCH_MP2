@@ -75,7 +75,7 @@ All test cases passed correctness checks comparing C and Assembly outputs.
 ---
 
 ## Video Demonstration
-[Link to video demonstration (5-10 minutes)]
+[Link to video demonstration](https://drive.google.com/drive/folders/16st7hNL_O3NRFGmUJr5PfDwgQ4jcKC9j?usp=sharing)
 
 The video covers:
 1. Source code walkthrough (C and Assembly)
